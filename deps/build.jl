@@ -10,6 +10,7 @@ download("http://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz",CompressFile)
 # Decompress Dataset
 cd(DataDir)
 run(`tar -zxvf $CompressFile`)
+rm(CompressFile)
 
 # Rename decompressed directory (for ease)
-mv(CifarDir,CifarFinalDir;remove_destination=true)  
+mv(CifarOrigDir,CifarFinalDir;remove_destination=true)  
