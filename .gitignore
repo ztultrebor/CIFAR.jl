@@ -6,3 +6,7 @@
 *.png
 *.pdf
 *.jpg
+*.bin
+*.txt
+*.gz
+*.html
