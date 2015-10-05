@@ -44,6 +44,19 @@ function normalize(X)
     return X
 end
 
+function center(X)
+  # Mean Removal
+  m = mean(X,2)
+  X = X .- m          # Broadcast mean subtraction
+
+  # Normalization of features
+  # across samples
+  s = std(X,2)
+  X = X ./ s 
+
+  return X
+end
+
 function toLuminance(dataset)
   features = size(dataset,1)
   pixels = convert(Int,features/3)
