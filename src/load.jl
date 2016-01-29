@@ -1,6 +1,3 @@
-using ASCIIPlots
-
-
 function labelnames()
   # Set File Name
   DataDir = joinpath(dirname(@__FILE__),"..","data","bin")
