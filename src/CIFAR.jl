@@ -1,10 +1,9 @@
 module CIFAR
 
 # package code goes here
-export traindata,
-       testdata
+export traindata, testdata, labelnames, download
 
-include("get.jl")
 include("load.jl")
+include("get.jl")
 
 end # module

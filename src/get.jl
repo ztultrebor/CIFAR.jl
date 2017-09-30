@@ -1,5 +1,8 @@
+import Base.download
+
+
 function download()
-  # File Names 
+  # File Names
   DataDir = joinpath(dirname(@__FILE__),"..","data")
   CompressFile = joinpath(DataDir,"bindata.tar.gz")
   CifarOrigDir = joinpath(DataDir,"cifar-10-batches-bin")
@@ -14,5 +17,5 @@ function download()
   rm(CompressFile)
 
   # Rename decompressed directory (for ease)
-  mv(CifarOrigDir,CifarFinalDir;remove_destination=true)  
+  mv(CifarOrigDir,CifarFinalDir;remove_destination=true)
 end
