@@ -24,8 +24,8 @@ function traindata(;batch_number=-1, normalize_images=false, grey=false)
     Samples = 10000
     Batches = 5
 
-    X = Array{Float64,2}(Features,Batches*Samples)
-    Y = Array{Float64,2}(Labels,Batches*Samples)
+    X = Array{Float32,2}(Features,Batches*Samples)
+    Y = Array{Float32,2}(Labels,Batches*Samples)
 
     for batch_number = 1:Batches
         # Assert to the number of batches
@@ -51,9 +51,9 @@ function traindata(;batch_number=-1, normalize_images=false, grey=false)
             read!(h_BatchFile,g)
             read!(h_BatchFile,b)
 
-            X[1:Pixels,idx] = r
-            X[Pixels+1:2*Pixels,idx] = g
-            X[2*Pixels+1:end,idx] = b
+            X[1:Pixels,idx] = r/256
+            X[Pixels+1:2*Pixels,idx] = g/256
+            X[2*Pixels+1:end,idx] = b/256
         end
 
         # Close File
@@ -72,8 +72,8 @@ function testdata()
     Features = 3*Pixels
     Samples = 10000
 
-    X = Array{Float64,2}(Features,Samples)
-    Y = Array{Float64,2}(Labels,Samples)
+    X = Array{Float32,2}(Features,Samples)
+    Y = Array{Float32,2}(Labels,Samples)
 
     DataDir = joinpath(dirname(@__FILE__),"..","data","bin")
     BatchFile = "test_batch.bin"
@@ -94,9 +94,9 @@ function testdata()
         read!(h_BatchFile,g)
         read!(h_BatchFile,b)
 
-        X[1:Pixels,idx] = r
-        X[Pixels+1:2*Pixels,idx] = g
-        X[2*Pixels+1:end,idx] = b
+        X[1:Pixels,idx] = r/256
+        X[Pixels+1:2*Pixels,idx] = g/256
+        X[2*Pixels+1:end,idx] = b/256
     end
 
     # Close File
