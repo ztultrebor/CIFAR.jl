@@ -15,7 +15,7 @@ function labelnames()
 end
 
 
-function traindata(;batch_number=-1, normalize_images=false, grey=false)
+function traindata(N=50000)
     Pixels = 1024
     Labels = 10
 
@@ -60,11 +60,11 @@ function traindata(;batch_number=-1, normalize_images=false, grey=false)
         close(h_BatchFile)
 
     end
-    return X,Y
+    return X[:,1:N],Y[:,1:N]
 end
 
 
-function testdata()
+function testdata(N=10000)
     Pixels = 1024
     Labels = 10
 
@@ -101,5 +101,5 @@ function testdata()
 
     # Close File
     close(h_BatchFile)
-    return X,Y
+    return X[:,1:N],Y[:,1:N]
 end
