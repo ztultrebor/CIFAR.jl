@@ -1,6 +1,9 @@
+using Printf
+
 function labelnames()
   # Set File Name
-  DataDir = joinpath(dirname(@__FILE__),"..","data","bin")
+  DataDir = joinpath(dirname(@__FILE__),"..","data",
+                      "cifar-10-batches-bin")
   LabelNameFile = joinpath(DataDir,"batches.meta.txt")
 
   # Open file
@@ -24,12 +27,13 @@ function traindata(N=50000)
     Samples = 10000
     Batches = 5
 
-    X = Array{Float32,2}(Features,Batches*Samples)
-    Y = Array{Float32,2}(Labels,Batches*Samples)
+    X = zeros(Float32, Features, Batches*Samples)
+    Y = zeros(Float32, Labels, Batches*Samples)
 
     for batch_number = 1:Batches
         # Assert to the number of batches
-        DataDir = joinpath(dirname(@__FILE__),"..","data","bin")
+        DataDir = joinpath(dirname(@__FILE__),"..","data",
+                            "cifar-10-batches-bin")
         BatchFile = @sprintf "data_batch_%d.bin" batch_number
         BatchFile = joinpath(DataDir,BatchFile)
         LabelNameFile = joinpath(DataDir,"batches.meta.txt")
@@ -38,9 +42,9 @@ function traindata(N=50000)
         h_BatchFile = open(BatchFile)
 
         # Loop Over Samples
-        r = Array{UInt8,1}(Pixels)
-        g = Array{UInt8,1}(Pixels)
-        b = Array{UInt8,1}(Pixels)
+        r = zeros(UInt8, Pixels)
+        g = zeros(UInt8, Pixels)
+        b = zeros(UInt8, Pixels)
         for j = 1:Samples
             # Read Label Byte
             idx = (batch_number-1)*Samples + j
@@ -72,19 +76,20 @@ function testdata(N=10000)
     Features = 3*Pixels
     Samples = 10000
 
-    X = Array{Float32,2}(Features,Samples)
-    Y = Array{Float32,2}(Labels,Samples)
+    X = zeros(Float32, Features, Samples)
+    Y = zeros(Float32, Labels, Samples)
 
-    DataDir = joinpath(dirname(@__FILE__),"..","data","bin")
+    DataDir = joinpath(dirname(@__FILE__),"..","data",
+                        "cifar-10-batches-bin")
     BatchFile = "test_batch.bin"
     BatchFile = joinpath(DataDir,BatchFile)
 
     h_BatchFile = open(BatchFile)
 
     # Loop Over Samples
-    r = Array{UInt8,1}(Pixels)
-    g = Array{UInt8,1}(Pixels)
-    b = Array{UInt8,1}(Pixels)
+    r = zeros(UInt8, Pixels)
+    g = zeros(UInt8, Pixels)
+    b = zeros(UInt8, Pixels)
     for idx = 1:Samples
         # Read Label Byte
         tgt = read(h_BatchFile,UInt8)+1
